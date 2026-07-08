@@ -871,7 +871,7 @@ if (tg) { tg.ready(); tg.expand(); tg.setHeaderColor('#0d0c0a'); tg.setBackgroun
 // ⚠️ Faqat Telegram ichida ishlaydi
 if (!tg || !tg.initData) {
   // ✏️ BOT_USERNAME ni o'zgartiring — masalan: 'ibadat_tracker_bot'
-  const BOT_USERNAME = 'YOUR_BOT_USERNAME';
+  const BOT_USERNAME = 'ibodatTrekerbot';
   document.body.innerHTML = `
     <div style="
       min-height:100vh; background:#0d0c0a; display:flex;
@@ -1404,7 +1404,7 @@ const PRAYERS = [
 ];
 
 const PRAYER_TYPES = [
-  { key:'fard',   label:'Fard',   cls:'active-fard'   },
+  { key:'fard',   label:'Farz',   cls:'active-fard'   },
   { key:'jamoat', label:'Jamoat', cls:'active-jamoat' },
   { key:'qazo',   label:'Qazo',   cls:'active-qazo'   },
 ];
@@ -1534,12 +1534,13 @@ function showNamozTab(name, btn) {
   if (name === 'namoz') renderNamoz();
 }
 
+
 // ══════════════════════════════════════════
 // FIKR — FEEDBACK
 // ══════════════════════════════════════════
-
+ 
 let fikrAnon = false;
-
+ 
 function fikrHTML() {
   return `
   <div class="fikr-wrap">
@@ -1548,7 +1549,7 @@ function fikrHTML() {
       <div class="fikr-title">Fikr-mulohaza</div>
       <div class="fikr-desc">
         <!-- O'Z MATNINGIZNI BU YERGA YOZING --><br>
-        Bu yerda ilovaga oid fikr va takliflaringizni qoldirishingiz mumkin.
+        Bu yerda ilovaga oid fikr va takliflaringizni qoldirishingiz mumkin. Agar sizga yoki sizning biznesingizga shu kabi yechimlar kerak bo'lsa telefon raqamingizni yoki username ni qoldiring, biz siz bilan bog'lanamiz
       </div>
     </div>
     <textarea class="fikr-textarea" id="fikrText" placeholder="Fikringizni yozing..."></textarea>
@@ -1563,26 +1564,25 @@ function fikrHTML() {
     </div>
   </div>`;
 }
-
+ 
 function renderFikr(containerId) {
   document.getElementById(containerId).innerHTML = fikrHTML();
   fikrAnon = false;
 }
-
+ 
 function toggleFikrAnon() {
   fikrAnon = !fikrAnon;
   const cb = document.getElementById('fikrCheckbox');
   if (cb) { cb.classList.toggle('checked', fikrAnon); cb.textContent = fikrAnon ? '✓' : ''; }
 }
-
+ 
 async function sendFikr() {
   const text = (document.getElementById('fikrText')?.value || '').trim();
   if (!text) { showToast("Fikrni yozing..."); return; }
-
+ 
   const btn = document.getElementById('fikrSendBtn');
   if (btn) { btn.disabled = true; btn.textContent = 'Yuborilmoqda...'; }
-
-  // Foydalanuvchi ma'lumotlari Telegram'dan olinadi
+ 
   const user = tg?.initDataUnsafe?.user;
   let senderInfo = '';
   if (!fikrAnon && user) {
@@ -1593,15 +1593,18 @@ async function sendFikr() {
   } else {
     senderInfo = '\n👤 Anonim foydalanuvchi';
   }
-
+ 
   const message = `💬 Yangi fikr-mulohaza:\n\n"${text}"${senderInfo}`;
-
+ 
+  // ✏️ O'ZGARTIRING:
+  const BOT_TOKEN     = '8902308240:AAHNplgdw1RKHBDlzQrpWDyfYV9hfyx8Pok';
+  const ADMIN_CHAT_ID = '665365889';
+ 
   try {
-    // Токен НИКОГДА не покидает сервер — запрос идёт на /api/send-feedback
-    const res = await fetch('/api/send-feedback', {
+    const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message })
+      body: JSON.stringify({ chat_id: ADMIN_CHAT_ID, text: message })
     });
     const data = await res.json();
     if (data.ok) {
@@ -1610,7 +1613,7 @@ async function sendFikr() {
       if (sent) sent.style.display = 'block';
       showToast('✓ Fikringiz yuborildi!');
     } else {
-      throw new Error(data.error);
+      throw new Error(data.description);
     }
   } catch(e) {
     if (btn) { btn.disabled = false; btn.textContent = 'Yuborish ✉️'; }
@@ -1618,7 +1621,7 @@ async function sendFikr() {
     console.error(e);
   }
 }
-
+ 
 // ══════════════════════════════════════════
 // SPLASH SCREEN
 // ══════════════════════════════════════════
