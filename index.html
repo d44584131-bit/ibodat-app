@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
 :root {
+  --tg-safe-top: 0px;
   --bg: #0d0c0a;
   --surface: #161410;
   --card: #1e1c17;
@@ -54,7 +55,6 @@ body {
   pointer-events: none;
 }
 
-/* Halo glow */
 .splash-halo {
   position: absolute;
   width: 340px; height: 340px;
@@ -78,7 +78,6 @@ body {
   50%       { opacity: 1;   transform: translate(-50%,-50%) scale(1.1); }
 }
 
-/* Card */
 .splash-card {
   position: relative;
   background: var(--card);
@@ -135,10 +134,9 @@ body {
   50%       { opacity: 1; }
 }
 
-/* ── APP SWITCHER ── */
 .app-switcher {
   display: flex;
-  margin: 16px 16px 0;
+  margin: calc(16px + var(--tg-safe-top)) 16px 0;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -168,7 +166,6 @@ body {
   color: var(--gold-light);
 }
 
-/* ── BOTTOM TABS ── */
 .tabs {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -196,11 +193,9 @@ body {
 .tab-btn .icon { font-size: 1.2rem; }
 .tab-btn.active { color: var(--gold-light); }
 
-/* ── PAGES ── */
 .page { display: none; padding: 0 16px; }
 .page.active { display: block; }
 
-/* ── PAGE HEADER ── */
 .page-header { text-align: center; padding: 20px 0 16px; }
 .arabic-title {
   font-family: 'Amiri', serif;
@@ -216,7 +211,6 @@ body {
   text-transform: uppercase;
 }
 
-/* ── WEEK NAV ── */
 .week-nav {
   display: flex;
   align-items: center;
@@ -236,7 +230,6 @@ body {
 .week-nav button:active { border-color: var(--gold-dim); color: var(--gold); }
 .week-label { font-size: 0.75rem; color: var(--text-muted); }
 
-/* ── PROGRESS BAR ── */
 .progress-bar {
   height: 2px;
   background: var(--border);
@@ -254,7 +247,6 @@ body {
   background: linear-gradient(90deg, var(--teal), var(--teal-light));
 }
 
-/* ── DAY CARDS (Dalail) ── */
 .days-grid { display: flex; flex-direction: column; gap: 7px; }
 .day-card {
   background: var(--card);
@@ -301,7 +293,6 @@ body {
 }
 .day-card.done .check-circle { background: var(--green); border-color: var(--green); color: #fff; }
 
-/* ── STATS ROW ── */
 .stats-row { display: flex; gap: 7px; margin: 12px 0 4px; }
 .stat-card {
   flex: 1;
@@ -315,7 +306,6 @@ body {
 .stat-val.teal { color: var(--teal-light); }
 .stat-lbl { font-size: 0.6rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
 
-/* ── QURAN GRID ── */
 .juz-section-title {
   font-size: 0.65rem;
   color: var(--text-dim);
@@ -352,7 +342,6 @@ body {
 .juz-cell .juz-check { font-size: 0.65rem; color: var(--teal); margin-top: 1px; }
 .juz-cell.partial .juz-check { color: var(--green); }
 
-/* ── JUZ DETAIL MODAL ── */
 .modal-overlay {
   display: none;
   position: fixed;
@@ -393,7 +382,6 @@ body {
 .modal-section { margin-bottom: 18px; }
 .modal-label { font-size: 0.7rem; color: var(--text-muted); margin-bottom: 8px; letter-spacing: 0.05em; }
 
-/* Complete toggle */
 .complete-toggle {
   display: flex;
   align-items: center;
@@ -416,7 +404,6 @@ body {
 }
 .complete-toggle.active .toggle-check { background: var(--teal); border-color: var(--teal); color: #fff; }
 
-/* Pages input */
 .pages-input-row {
   display: flex;
   align-items: center;
@@ -467,7 +454,6 @@ body {
 }
 .modal-save-btn:active { opacity: 0.85; }
 
-/* Day log list */
 .day-log-list { display: flex; flex-direction: column; gap: 6px; }
 .day-log-item {
   background: var(--card);
@@ -481,7 +467,6 @@ body {
 .day-log-date { font-size: 0.72rem; color: var(--text-muted); }
 .day-log-info { font-size: 0.8rem; color: var(--text); font-weight: 500; }
 
-/* ── ZIKR PAGE ── */
 .zikr-header { text-align: center; padding: 20px 0 18px; }
 .zikr-date { font-size: 0.7rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 5px; }
 .zikr-page-title { font-size: 1rem; font-weight: 600; color: var(--gold-light); }
@@ -526,7 +511,6 @@ body {
 .reset-btn { background: none; border: 1px solid var(--border); color: var(--text-muted); font-size: 0.7rem; cursor: pointer; padding: 7px 16px; display: block; margin: 8px auto 0; font-family: 'Inter', sans-serif; border-radius: 8px; letter-spacing: 0.03em; transition: all 0.2s; }
 .reset-btn:active { border-color: #8b3a3a; color: #c97070; background: #1a1010; }
 
-/* ── FIKR PAGE ── */
 .fikr-wrap { padding: 20px 0; }
 .fikr-header { text-align: center; margin-bottom: 24px; }
 .fikr-icon { font-size: 2.2rem; margin-bottom: 8px; }
@@ -546,7 +530,6 @@ body {
 .fikr-sent-icon { font-size: 2.5rem; margin-bottom: 10px; }
 .fikr-sent-text { font-size: 0.88rem; color: var(--green-light); }
 
-/* ── NAMOZ TRACKER ── */
 :root { --purple: #7c3aed; --purple-light: #a78bfa; --purple-bg: #110e1a; --purple-dim: #3d1f7a; }
 
 .namoz-date-nav {
@@ -613,7 +596,6 @@ body {
 .namoz-type-btn.active-jamoat { background: var(--green);      border-color: var(--green);  color: #fff; }
 .namoz-type-btn.active-qazo   { background: #7a5020;           border-color: #c8904a;        color: #c8904a; }
 
-/* ── TOAST ── */
 .toast {
   position: fixed;
   bottom: 90px;
@@ -636,7 +618,6 @@ body {
 </head>
 <body>
 
-<!-- ══════════════ SPLASH SCREEN ══════════════ -->
 <div id="splashScreen">
   <div class="splash-halo"></div>
   <div class="splash-halo2"></div>
@@ -649,7 +630,6 @@ body {
   </div>
 </div>
 
-<!-- APP SWITCHER -->
 <div class="app-switcher">
   <button class="app-btn" id="appBtnNamoz" onclick="switchApp('namoz')">
     <span class="aicon">🤲</span>
@@ -669,10 +649,8 @@ body {
   </button>
 </div>
 
-<!-- ══════════════ DALAIL APP ══════════════ -->
 <div id="app-dalail">
 
-  <!-- TAB: KITOB -->
   <div class="page active" id="dp-kitob">
     <div class="page-header">
       <div class="arabic-title">دَلَائِلُ الْخَيْرَات</div>
@@ -697,22 +675,10 @@ body {
     </div>
   </div>
 
-  <!-- TAB: ZIKR -->
-  <div class="page" id="dp-zikr">
-    <div class="zikr-header">
-      <div class="zikr-date" id="zikrDate"></div>
-      <div class="zikr-page-title">Kunlik zikr</div>
-    </div>
-    <div class="zikr-cards" id="zikrCards"></div>
-    <div style="height:14px"></div>
-  </div>
-
-  <!-- TAB: FIKR (Dalail) -->
   <div class="page" id="dp-fikr">
     <div id="fikr-content-dalail"></div>
   </div>
 
-  <!-- DALAIL BOTTOM TABS -->
   <div class="tabs" id="dalailTabs">
     <button class="tab-btn active" onclick="showDalailTab('kitob',this)">
       <span class="icon">📖</span><span>Kitob</span>
@@ -723,10 +689,8 @@ body {
   </div>
 </div>
 
-<!-- ══════════════ QURAN APP ══════════════ -->
 <div id="app-quran" style="display:none">
 
-  <!-- TAB: JUZLAR -->
   <div class="page active" id="qp-juzlar">
     <div class="page-header">
       <div class="arabic-title" style="color:var(--teal-light)">الْقُرْآن الْكَرِيم</div>
@@ -750,7 +714,6 @@ body {
     </div>
   </div>
 
-  <!-- TAB: BUGUN -->
   <div class="page" id="qp-bugun">
     <div class="page-header">
       <div class="arabic-title" style="font-size:1.4rem; color:var(--teal-light)">Bugungi o'qish</div>
@@ -773,12 +736,10 @@ body {
     <div style="height:14px"></div>
   </div>
 
-  <!-- TAB: FIKR (Quran) -->
   <div class="page" id="qp-fikr">
     <div id="fikr-content-quran"></div>
   </div>
 
-  <!-- QURAN BOTTOM TABS -->
   <div class="tabs" id="quranTabs" style="display:none">
     <button class="tab-btn active" onclick="showQuranTab('juzlar',this)">
       <span class="icon">🕌</span><span>Juzlar</span>
@@ -792,7 +753,6 @@ body {
   </div>
 </div>
 
-<!-- ══════════════ NAMOZ APP ══════════════ -->
 <div id="app-namoz" style="display:none">
   <div class="page active" id="np-namoz">
     <div class="page-header">
@@ -839,7 +799,31 @@ body {
   </div>
 </div>
 
-<!-- JUZ DETAIL MODAL -->
+<!-- ══════════════ ZIKR APP (yangi, funksional ko'chirildi) ══════════════ -->
+<div id="app-zikr" style="display:none">
+  <div class="page active" id="zp-zikr">
+    <div class="zikr-header">
+      <div class="zikr-date" id="zikrDate"></div>
+      <div class="zikr-page-title">Kunlik zikr</div>
+    </div>
+    <div class="zikr-cards" id="zikrCards"></div>
+    <div style="height:14px"></div>
+  </div>
+
+  <div class="page" id="zp-fikr">
+    <div id="fikr-content-zikr"></div>
+  </div>
+
+  <div class="tabs" id="zikrTabs" style="display:none">
+    <button class="tab-btn active" onclick="showZikrTab('zikr',this)">
+      <span class="icon">📿</span><span>Zikr</span>
+    </button>
+    <button class="tab-btn" onclick="showZikrTab('fikr',this)">
+      <span class="icon">💬</span><span>Fikr</span>
+    </button>
+  </div>
+</div>
+
 <div class="modal-overlay" id="juzModal">
   <div class="modal">
     <div class="modal-handle"></div>
@@ -862,15 +846,24 @@ body {
 <div class="toast" id="toast"></div>
 
 <script>
-// ══════════════════════════════════════════
-// TELEGRAM + STORAGE
-// ══════════════════════════════════════════
 const tg = window.Telegram?.WebApp;
 if (tg) { tg.ready(); tg.expand(); tg.setHeaderColor('#0d0c0a'); tg.setBackgroundColor('#0d0c0a'); }
 
-// ⚠️ Faqat Telegram ichida ishlaydi
+// Telegram fullscreen rejimida yuqorida "close/menu" tugmalari bo'lishi mumkin —
+// app-switcher shu tugmalar ostiga tushib qolmasligi uchun xavfsiz zonani hisoblaymiz
+function applyTgSafeArea() {
+  if (!tg) return;
+  const top = (tg.contentSafeAreaInset?.top || 0) + (tg.safeAreaInset?.top || 0);
+  document.documentElement.style.setProperty('--tg-safe-top', top + 'px');
+}
+if (tg) {
+  applyTgSafeArea();
+  tg.onEvent && tg.onEvent('safeAreaChanged', applyTgSafeArea);
+  tg.onEvent && tg.onEvent('contentSafeAreaChanged', applyTgSafeArea);
+  tg.onEvent && tg.onEvent('viewportChanged', applyTgSafeArea);
+}
+
 if (!tg || !tg.initData) {
-  // ✏️ BOT_USERNAME ni o'zgartiring — masalan: 'ibadat_tracker_bot'
   const BOT_USERNAME = 'ibodatTrekerbot';
   document.body.innerHTML = `
     <div style="
@@ -934,9 +927,6 @@ const Storage = {
   }
 };
 
-// ══════════════════════════════════════════
-// DATA
-// ══════════════════════════════════════════
 const DALAIL_DAYS = [
   { uz:"Dushanba",   ar:"الاثنين",  hizb:"1-hizb", jsDay:1 },
   { uz:"Seshanba",   ar:"الثلاثاء", hizb:"2-hizb", jsDay:2 },
@@ -959,9 +949,6 @@ const JUZ_NAMES = ["Al-Fotiha","Al-Baqara","Al-Baqara","An-Niso","An-Niso","Al-M
 const UZ_MONTHS = ['yanvar','fevral','mart','aprel','may','iyun','iyul','avgust','sentabr','oktabr','noyabr','dekabr'];
 const UZ_DAYS   = ['Yakshanba','Dushanba','Seshanba','Chorshanba','Payshanba','Juma','Shanba'];
 
-// ══════════════════════════════════════════
-// HELPERS
-// ══════════════════════════════════════════
 function todayStr() {
   const d = new Date();
   return `${d.getFullYear()}-${d.getMonth()+1}-${d.getDate()}`;
@@ -999,40 +986,43 @@ function showToast(msg, type='') {
   setTimeout(() => t.classList.remove('show'), 2400);
 }
 
-// ══════════════════════════════════════════
-// APP SWITCHER
-// ══════════════════════════════════════════
 let currentApp = 'dalail';
 function switchApp(app) {
   currentApp = app;
   document.getElementById('app-dalail').style.display = app === 'dalail' ? '' : 'none';
   document.getElementById('app-quran').style.display  = app === 'quran'  ? '' : 'none';
   document.getElementById('app-namoz').style.display  = app === 'namoz'  ? '' : 'none';
+  document.getElementById('app-zikr').style.display   = app === 'zikr'   ? '' : 'none';
   document.getElementById('dalailTabs').style.display = app === 'dalail' ? '' : 'none';
   document.getElementById('quranTabs').style.display  = app === 'quran'  ? '' : 'none';
   document.getElementById('namozTabs').style.display  = app === 'namoz'  ? '' : 'none';
+  document.getElementById('zikrTabs').style.display   = app === 'zikr'   ? '' : 'none';
   document.getElementById('appBtnDalail').classList.toggle('active', app === 'dalail');
   document.getElementById('appBtnQuran').classList.toggle('active', app === 'quran');
   document.getElementById('appBtnNamoz').classList.toggle('active', app === 'namoz');
+  document.getElementById('appBtnZikr').classList.toggle('active', app === 'zikr');
   if (app === 'quran') { renderJuzGrid(); }
   if (app === 'namoz') { namozDayOffset = 0; renderNamoz(); }
+  if (app === 'zikr') { renderZikr(); }
 }
 
-// ══════════════════════════════════════════
-// DALAIL TABS
-// ══════════════════════════════════════════
 function showDalailTab(name, btn) {
   document.querySelectorAll('#app-dalail .page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('#dalailTabs .tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('dp-'+name).classList.add('active');
   btn.classList.add('active');
-  if (name === 'zikr') renderZikr();
   if (name === 'fikr') renderFikr('fikr-content-dalail');
 }
 
-// ══════════════════════════════════════════
-// DALAIL TRACKER
-// ══════════════════════════════════════════
+function showZikrTab(name, btn) {
+  document.querySelectorAll('#app-zikr .page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('#zikrTabs .tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('zp-'+name).classList.add('active');
+  btn.classList.add('active');
+  if (name === 'zikr') renderZikr();
+  if (name === 'fikr') renderFikr('fikr-content-zikr');
+}
+
 let weekOffset = 0;
 
 function dCalcMonth() {
@@ -1070,7 +1060,6 @@ function renderTracker() {
   const now = new Date();
   const todayJsDay = now.getDay();
 
-  // Определяем начало текущей недели (понедельник)
   const diffToMon = todayJsDay === 0 ? -6 : 1 - todayJsDay;
   const weekStart = new Date(now);
   weekStart.setDate(now.getDate() + diffToMon + weekOffset * 7);
@@ -1086,8 +1075,6 @@ function renderTracker() {
     const isToday = weekOffset === 0 && day.jsDay === todayJsDay;
     if (isDone) done++;
 
-    // Вычисляем дату этого дня в текущем отображаемом смещении недели
-    // DALAIL_DAYS начинается с понедельника (i=0) → +0 дней от weekStart
     const dayDate = new Date(weekStart);
     dayDate.setDate(weekStart.getDate() + i);
     dayDate.setHours(0,0,0,0);
@@ -1134,9 +1121,6 @@ function renderTracker() {
 document.getElementById('prevWeek').addEventListener('click', () => { weekOffset--; renderTracker(); });
 document.getElementById('nextWeek').addEventListener('click', () => { weekOffset++; renderTracker(); });
 
-// ══════════════════════════════════════════
-// ZIKR
-// ══════════════════════════════════════════
 function renderZikr() {
   const today = new Date();
   document.getElementById('zikrDate').textContent = `${UZ_DAYS[today.getDay()]}, ${fmtDate(today)}`;
@@ -1145,23 +1129,19 @@ function renderZikr() {
 
   ZIKRS.forEach(zikr => {
     const key = getZikrKey(zikr.id);
-    // stored: { total: N }  — cumulative for today, never resets automatically
     const saved = Storage.get(key) || { total: 0 };
     const total = saved.total || 0;
 
-    // current round progress: position within current target cycle
     const roundCount = total % zikr.target;
-    // how many full rounds completed
     const rounds = Math.floor(total / zikr.target);
 
     const pct = roundCount / zikr.target;
     const R = 18, C = 2 * Math.PI * R;
-    const isRoundComplete = total > 0 && roundCount === 0; // just hit multiple
+    const isRoundComplete = total > 0 && roundCount === 0;
 
     const card = document.createElement('div');
     card.className = 'zikr-card' + (isRoundComplete ? ' completed' : '');
 
-    // rounds badge text
     const roundsBadge = rounds > 0
       ? `<span style="background:var(--green);color:#fff;font-size:0.6rem;font-weight:600;padding:2px 7px;border-radius:99px;margin-left:6px">${rounds}✕</span>`
       : '';
@@ -1193,7 +1173,6 @@ function renderZikr() {
       const cur = (Storage.get(key) || { total: 0 }).total;
       const next = cur + 1;
       Storage.set(key, { total: next });
-      // toast exactly on each multiple
       if (next % zikr.target === 0) {
         const r = next / zikr.target;
         showToast(`✓ ${zikr.uz} — ${r}✕ bajarildi! Alloh qabul qilsin 🤍`);
@@ -1209,9 +1188,6 @@ function renderZikr() {
   });
 }
 
-// ══════════════════════════════════════════
-// QURAN TABS
-// ══════════════════════════════════════════
 function showQuranTab(name, btn) {
   document.querySelectorAll('#app-quran .page').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('#quranTabs .tab-btn').forEach(b => b.classList.remove('active'));
@@ -1222,9 +1198,6 @@ function showQuranTab(name, btn) {
   if (name === 'fikr') renderFikr('fikr-content-quran');
 }
 
-// ══════════════════════════════════════════
-// QURAN — JUZ GRID
-// ══════════════════════════════════════════
 function getJuzKey(n) { return `q_juz_${n}`; }
 function getJuzLogs(n) { return Storage.get(`q_logs_${n}`) || []; }
 
@@ -1234,14 +1207,11 @@ function qCalcStats() {
     const d = Storage.get(getJuzKey(j));
     if (d?.complete) done++;
   }
-  // total pages from day logs
   for (const k in Storage._cache) {
     if (!k.startsWith('q_day_')) continue;
     const log = Storage.get(k);
     if (log?.pages) pages += log.pages;
   }
-  // khatm = every 30 juz complete counted; simple: floor(timesAllComplete)
-  // we store khatm count separately
   khatm = Storage.get('q_khatm') || 0;
   return { done, pages, khatm };
 }
@@ -1267,9 +1237,6 @@ function renderJuzGrid() {
   }
 }
 
-// ══════════════════════════════════════════
-// JUZ MODAL
-// ══════════════════════════════════════════
 let modalJuz = null;
 
 function openJuzModal(juzNum) {
@@ -1287,7 +1254,6 @@ function openJuzModal(juzNum) {
     toggle.classList.remove('active');
     check.textContent = '';
   }
-  // logs
   const logs = getJuzLogs(juzNum);
   const logList = document.getElementById('modalLogList');
   logList.innerHTML = '';
@@ -1311,13 +1277,11 @@ function toggleJuzComplete() {
   data.complete = !data.complete;
   Storage.set(key, data);
 
-  // Check if all 30 done → khatm
   if (data.complete) {
     const allDone = Array.from({length:30}, (_,i) => Storage.get(getJuzKey(i+1))?.complete).every(Boolean);
     if (allDone) {
       const khatm = (Storage.get('q_khatm') || 0) + 1;
       Storage.set('q_khatm', khatm);
-      // reset all juz
       for (let j=1;j<=30;j++) Storage.set(getJuzKey(j), { complete: false });
       closeJuzModal();
       showToast(`🎉 Xatm qilindi! Alloh qabul qilsin. Jami: ${khatm} marta`, 'teal');
@@ -1338,24 +1302,19 @@ document.getElementById('juzModal').addEventListener('click', e => {
   if (e.target === document.getElementById('juzModal')) closeJuzModal();
 });
 
-// ══════════════════════════════════════════
-// TODAY TAB — daily log
-// ══════════════════════════════════════════
 let selectedJuzToday = null;
 
 function renderTodayTab() {
   const todayPagesEl = document.getElementById('todayPages');
   const dayLogListEl = document.getElementById('dayLogList');
-  if (!todayPagesEl || !dayLogListEl) return; // страница не активна
+  if (!todayPagesEl || !dayLogListEl) return;
 
   const today = new Date();
   document.getElementById('qTodayDate').textContent = `${UZ_DAYS[today.getDay()]}, ${fmtDate(today)}`;
 
-  // restore today's saved pages
   const savedLog = Storage.get(`q_day_${todayStr()}`);
   document.getElementById('todayPages').value = savedLog?.pages || '';
 
-  // recent logs
   const logList = document.getElementById('dayLogList');
   logList.innerHTML = '';
   const recent = [];
@@ -1392,9 +1351,6 @@ function saveTodayLog() {
   renderJuzGrid();
 }
 
-// ══════════════════════════════════════════
-// NAMOZ TRACKER
-// ══════════════════════════════════════════
 const PRAYERS = [
   { id:'bomdod',  uz:'Bomdod',  ar:'الفجر',   order:0 },
   { id:'peshin',  uz:'Peshin',  ar:'الظهر',   order:1 },
@@ -1409,7 +1365,7 @@ const PRAYER_TYPES = [
   { key:'qazo',   label:'Qazo',   cls:'active-qazo'   },
 ];
 
-let namozDayOffset = 0; // 0 = bugun, -1 = kecha, +1 = erta (bloklangan)
+let namozDayOffset = 0;
 
 function getNamozDateStr(offset) {
   const d = new Date();
@@ -1428,7 +1384,6 @@ function namozDayLabel(offset) {
 }
 
 function namozWeekCount() {
-  // count all prayers marked this week (Mon–today)
   const now = new Date();
   const dow = now.getDay();
   const diffMon = dow === 0 ? -6 : 1 - dow;
@@ -1446,7 +1401,7 @@ function namozStreak() {
     const ds = getNamozDateStr(i);
     const allDone = PRAYERS.every(p => !!Storage.get(getNamozKey(ds, p.id)));
     if (allDone) streak++;
-    else if (i < 0) break; // today not yet done is ok, but break on any past miss
+    else if (i < 0) break;
   }
   return streak;
 }
@@ -1456,7 +1411,6 @@ function renderNamoz() {
   const dateStr = getNamozDateStr(namozDayOffset);
   document.getElementById('namozDateLabel').textContent = namozDayLabel(namozDayOffset);
 
-  // disable next button if today
   document.getElementById('namozNextDay').style.opacity = namozDayOffset >= 0 ? '0.3' : '1';
   document.getElementById('namozNextDay').disabled = namozDayOffset >= 0;
 
@@ -1469,7 +1423,7 @@ function renderNamoz() {
 
   PRAYERS.forEach(prayer => {
     const key = getNamozKey(dateStr, prayer.id);
-    const saved = Storage.get(key); // null | 'fard' | 'jamoat' | 'qazo'
+    const saved = Storage.get(key);
     if (saved) doneCnt++;
 
     const cardClass = saved ? `done-${saved}` : '';
@@ -1496,7 +1450,6 @@ function renderNamoz() {
           const type = btn.dataset.type;
           const curKey = getNamozKey(dateStr, pid);
           const cur = Storage.get(curKey);
-          // toggle: click same → remove, click other → set
           Storage.set(curKey, cur === type ? null : type);
           renderNamoz();
         });
@@ -1508,7 +1461,6 @@ function renderNamoz() {
 
   grid.appendChild(wrap);
 
-  // progress
   const pct = Math.round(doneCnt / 5 * 100);
   document.getElementById('namozProgressFill').style.width = pct + '%';
   document.getElementById('namozProgressText').textContent = `${doneCnt}/5`;
@@ -1534,13 +1486,8 @@ function showNamozTab(name, btn) {
   if (name === 'namoz') renderNamoz();
 }
 
-
-// ══════════════════════════════════════════
-// FIKR — FEEDBACK
-// ══════════════════════════════════════════
- 
 let fikrAnon = false;
- 
+
 function fikrHTML() {
   return `
   <div class="fikr-wrap">
@@ -1564,25 +1511,25 @@ function fikrHTML() {
     </div>
   </div>`;
 }
- 
+
 function renderFikr(containerId) {
   document.getElementById(containerId).innerHTML = fikrHTML();
   fikrAnon = false;
 }
- 
+
 function toggleFikrAnon() {
   fikrAnon = !fikrAnon;
   const cb = document.getElementById('fikrCheckbox');
   if (cb) { cb.classList.toggle('checked', fikrAnon); cb.textContent = fikrAnon ? '✓' : ''; }
 }
- 
+
 async function sendFikr() {
   const text = (document.getElementById('fikrText')?.value || '').trim();
   if (!text) { showToast("Fikrni yozing..."); return; }
- 
+
   const btn = document.getElementById('fikrSendBtn');
   if (btn) { btn.disabled = true; btn.textContent = 'Yuborilmoqda...'; }
- 
+
   const user = tg?.initDataUnsafe?.user;
   let senderInfo = '';
   if (!fikrAnon && user) {
@@ -1593,13 +1540,12 @@ async function sendFikr() {
   } else {
     senderInfo = '\n👤 Anonim foydalanuvchi';
   }
- 
+
   const message = `💬 Yangi fikr-mulohaza:\n\n"${text}"${senderInfo}`;
- 
-  // ✏️ O'ZGARTIRING:
+
   const BOT_TOKEN     = '8902308240:AAHNplgdw1RKHBDlzQrpWDyfYV9hfyx8Pok';
   const ADMIN_CHAT_ID = '665365889';
- 
+
   try {
     const res = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
       method: 'POST',
@@ -1621,12 +1567,7 @@ async function sendFikr() {
     console.error(e);
   }
 }
- 
-// ══════════════════════════════════════════
-// SPLASH SCREEN
-// ══════════════════════════════════════════
 
-// ✏️ O'Z SITATLARINGIZNI QO'SHING:
 const SPLASH_QUOTES = [
    { text: "🌿 Alloh bugungi amalingizni qabul qilsin", sub: "" },
    { text: "📖 Oz bo'lsa ham, davomiy amal go'zal",  sub: "" },
@@ -1653,11 +1594,14 @@ function showSplash() {
   function closeSplash() {
     if (closed) return;
     closed = true;
+    clearTimeout(autoCloseTimer);
     hideSplash();
   }
 
   splash.addEventListener('touchstart', closeSplash, { passive: true });
   splash.addEventListener('click', closeSplash);
+
+  const autoCloseTimer = setTimeout(closeSplash, 5000);
 }
 
 function hideSplash() {
@@ -1666,9 +1610,6 @@ function hideSplash() {
   setTimeout(() => { splash.style.display = 'none'; }, 650);
 }
 
-// ══════════════════════════════════════════
-// BOOT
-// ══════════════════════════════════════════
 Storage.init().then(() => {
   renderTracker();
   switchApp('namoz');
