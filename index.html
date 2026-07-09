@@ -138,7 +138,8 @@ body {
   display: flex;
   flex-direction: column;
   position: fixed;
-  top: calc(16px + var(--tg-safe-top));
+  top: 50%;
+  transform: translateY(-50%);
   right: 16px;
   left: auto;
   width: 62px;
@@ -324,8 +325,8 @@ body {
 }
 .juz-grid {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 6px;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
   margin-bottom: 14px;
 }
 .juz-cell {
@@ -344,10 +345,10 @@ body {
 .juz-cell:active { transform: scale(0.94); }
 .juz-cell.done { background: var(--teal-bg); border-color: var(--teal); }
 .juz-cell.partial { background: #0e1510; border-color: #2a5a38; }
-.juz-cell .juz-num { font-size: 0.75rem; font-weight: 600; color: var(--text-muted); }
+.juz-cell .juz-num { font-size: 0.92rem; font-weight: 600; color: var(--text-muted); }
 .juz-cell.done .juz-num { color: var(--teal-light); }
 .juz-cell.partial .juz-num { color: var(--green-light); }
-.juz-cell .juz-check { font-size: 0.65rem; color: var(--teal); margin-top: 1px; }
+.juz-cell .juz-check { font-size: 0.75rem; color: var(--teal); margin-top: 1px; }
 .juz-cell.partial .juz-check { color: var(--green); }
 
 .modal-overlay {
