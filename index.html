@@ -136,7 +136,11 @@ body {
 
 .app-switcher {
   display: flex;
-  margin: calc(16px + var(--tg-safe-top)) 16px 0;
+  position: fixed;
+  top: calc(16px + var(--tg-safe-top));
+  left: 16px;
+  right: 16px;
+  z-index: 150;
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 12px;
@@ -855,6 +859,7 @@ function applyTgSafeArea() {
   if (!tg) return;
   const top = (tg.contentSafeAreaInset?.top || 0) + (tg.safeAreaInset?.top || 0);
   document.documentElement.style.setProperty('--tg-safe-top', top + 'px');
+  requestAnimationFrame(applyTopSpacing);
 }
 if (tg) {
   applyTgSafeArea();
@@ -862,6 +867,18 @@ if (tg) {
   tg.onEvent && tg.onEvent('contentSafeAreaChanged', applyTgSafeArea);
   tg.onEvent && tg.onEvent('viewportChanged', applyTgSafeArea);
 }
+
+// app-switcher endi fixed — qolgan barcha sahifalar shu switcher ostidan boshlanishi uchun
+// ekranning qolgan qismiga moslab yuqori bo'shliqni hisoblaymiz
+function applyTopSpacing() {
+  const el = document.querySelector('.app-switcher');
+  if (!el) return;
+  const rect = el.getBoundingClientRect();
+  document.body.style.paddingTop = Math.max(0, rect.bottom + 12) + 'px';
+}
+window.addEventListener('resize', applyTopSpacing);
+window.addEventListener('orientationchange', () => requestAnimationFrame(applyTopSpacing));
+window.addEventListener('load', applyTopSpacing);
 
 if (!tg || !tg.initData) {
   const BOT_USERNAME = 'ibodatTrekerbot';
@@ -1614,6 +1631,8 @@ Storage.init().then(() => {
   renderTracker();
   switchApp('namoz');
   showSplash();
+  applyTopSpacing();
+  requestAnimationFrame(applyTopSpacing);
 });
 </script>
 </body>
