@@ -136,20 +136,23 @@ body {
 
 .app-switcher {
   display: flex;
+  flex-direction: column;
   position: fixed;
   top: calc(16px + var(--tg-safe-top));
-  left: 16px;
   right: 16px;
+  left: auto;
+  width: 62px;
   z-index: 150;
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: 12px;
-  padding: 4px;
+  border-radius: 16px;
+  padding: 6px;
   gap: 4px;
 }
 .app-btn {
-  flex: 1;
-  padding: 9px 4px;
+  flex: none;
+  width: 100%;
+  padding: 9px 2px;
   border: none;
   border-radius: 9px;
   background: transparent;
@@ -164,7 +167,8 @@ body {
   align-items: center;
   gap: 3px;
 }
-.app-btn .aicon { font-size: 1.1rem; }
+.app-btn .aicon { font-size: 1.05rem; }
+.app-btn span:not(.aicon) { font-size: 0.6rem; line-height: 1.15; text-align: center; }
 .app-btn.active {
   background: var(--card);
   color: var(--gold-light);
@@ -651,6 +655,10 @@ body {
     <span class="aicon">📿</span>
     <span>Zikr</span>
   </button>
+  <button class="app-btn" id="appBtnFikr" onclick="switchApp('fikr')">
+    <span class="aicon">💬</span>
+    <span>Fikr</span>
+  </button>
 </div>
 
 <div id="app-dalail">
@@ -679,18 +687,6 @@ body {
     </div>
   </div>
 
-  <div class="page" id="dp-fikr">
-    <div id="fikr-content-dalail"></div>
-  </div>
-
-  <div class="tabs" id="dalailTabs">
-    <button class="tab-btn active" onclick="showDalailTab('kitob',this)">
-      <span class="icon">📖</span><span>Kitob</span>
-    </button>
-    <button class="tab-btn" onclick="showDalailTab('fikr',this)">
-      <span class="icon">💬</span><span>Fikr</span>
-    </button>
-  </div>
 </div>
 
 <div id="app-quran" style="display:none">
@@ -740,19 +736,12 @@ body {
     <div style="height:14px"></div>
   </div>
 
-  <div class="page" id="qp-fikr">
-    <div id="fikr-content-quran"></div>
-  </div>
-
   <div class="tabs" id="quranTabs" style="display:none">
     <button class="tab-btn active" onclick="showQuranTab('juzlar',this)">
       <span class="icon">🕌</span><span>Juzlar</span>
     </button>
     <button class="tab-btn" onclick="showQuranTab('bugun',this)">
       <span class="icon">✏️</span><span>Bugun</span>
-    </button>
-    <button class="tab-btn" onclick="showQuranTab('fikr',this)">
-      <span class="icon">💬</span><span>Fikr</span>
     </button>
   </div>
 </div>
@@ -789,18 +778,6 @@ body {
     </div>
   </div>
 
-  <div class="tabs" id="namozTabs">
-    <button class="tab-btn active" onclick="showNamozTab('namoz',this)">
-      <span class="icon">🤲</span><span>Namoz</span>
-    </button>
-    <button class="tab-btn" onclick="showNamozTab('fikr',this)">
-      <span class="icon">💬</span><span>Fikr</span>
-    </button>
-  </div>
-
-  <div class="page" id="np-fikr">
-    <div id="fikr-content-namoz"></div>
-  </div>
 </div>
 
 <!-- ══════════════ ZIKR APP (yangi, funksional ko'chirildi) ══════════════ -->
@@ -814,17 +791,12 @@ body {
     <div style="height:14px"></div>
   </div>
 
-  <div class="page" id="zp-fikr">
-    <div id="fikr-content-zikr"></div>
-  </div>
+</div>
 
-  <div class="tabs" id="zikrTabs" style="display:none">
-    <button class="tab-btn active" onclick="showZikrTab('zikr',this)">
-      <span class="icon">📿</span><span>Zikr</span>
-    </button>
-    <button class="tab-btn" onclick="showZikrTab('fikr',this)">
-      <span class="icon">💬</span><span>Fikr</span>
-    </button>
+<!-- ══════════════ FIKR (mustaqil bo'lim) ══════════════ -->
+<div id="app-fikr" style="display:none">
+  <div class="page active" id="fp-fikr">
+    <div id="fikr-content-global"></div>
   </div>
 </div>
 
@@ -868,13 +840,16 @@ if (tg) {
   tg.onEvent && tg.onEvent('viewportChanged', applyTgSafeArea);
 }
 
-// app-switcher endi fixed — qolgan barcha sahifalar shu switcher ostidan boshlanishi uchun
-// ekranning qolgan qismiga moslab yuqori bo'shliqni hisoblaymiz
+// app-switcher endi o'ng tomonda vertikal fixed panel — qolgan kontent
+// uning tagida qolib ketmasligi uchun o'ngdan joy ajratamiz, yuqoridan esa
+// faqat Telegram xavfsiz zonasi uchun kichik bo'shliq yetarli
 function applyTopSpacing() {
   const el = document.querySelector('.app-switcher');
   if (!el) return;
   const rect = el.getBoundingClientRect();
-  document.body.style.paddingTop = Math.max(0, rect.bottom + 12) + 'px';
+  const safeTopPx = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--tg-safe-top')) || 0;
+  document.body.style.paddingTop = Math.max(0, safeTopPx + 16) + 'px';
+  document.body.style.paddingRight = Math.max(0, rect.width + 24) + 'px';
 }
 window.addEventListener('resize', applyTopSpacing);
 window.addEventListener('orientationchange', () => requestAnimationFrame(applyTopSpacing));
@@ -1010,34 +985,17 @@ function switchApp(app) {
   document.getElementById('app-quran').style.display  = app === 'quran'  ? '' : 'none';
   document.getElementById('app-namoz').style.display  = app === 'namoz'  ? '' : 'none';
   document.getElementById('app-zikr').style.display   = app === 'zikr'   ? '' : 'none';
-  document.getElementById('dalailTabs').style.display = app === 'dalail' ? '' : 'none';
+  document.getElementById('app-fikr').style.display   = app === 'fikr'   ? '' : 'none';
   document.getElementById('quranTabs').style.display  = app === 'quran'  ? '' : 'none';
-  document.getElementById('namozTabs').style.display  = app === 'namoz'  ? '' : 'none';
-  document.getElementById('zikrTabs').style.display   = app === 'zikr'   ? '' : 'none';
   document.getElementById('appBtnDalail').classList.toggle('active', app === 'dalail');
   document.getElementById('appBtnQuran').classList.toggle('active', app === 'quran');
   document.getElementById('appBtnNamoz').classList.toggle('active', app === 'namoz');
   document.getElementById('appBtnZikr').classList.toggle('active', app === 'zikr');
+  document.getElementById('appBtnFikr').classList.toggle('active', app === 'fikr');
   if (app === 'quran') { renderJuzGrid(); }
   if (app === 'namoz') { namozDayOffset = 0; renderNamoz(); }
   if (app === 'zikr') { renderZikr(); }
-}
-
-function showDalailTab(name, btn) {
-  document.querySelectorAll('#app-dalail .page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('#dalailTabs .tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('dp-'+name).classList.add('active');
-  btn.classList.add('active');
-  if (name === 'fikr') renderFikr('fikr-content-dalail');
-}
-
-function showZikrTab(name, btn) {
-  document.querySelectorAll('#app-zikr .page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('#zikrTabs .tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('zp-'+name).classList.add('active');
-  btn.classList.add('active');
-  if (name === 'zikr') renderZikr();
-  if (name === 'fikr') renderFikr('fikr-content-zikr');
+  if (app === 'fikr') { renderFikr('fikr-content-global'); }
 }
 
 let weekOffset = 0;
@@ -1212,7 +1170,6 @@ function showQuranTab(name, btn) {
   btn.classList.add('active');
   if (name === 'bugun') renderTodayTab();
   if (name === 'juzlar') renderJuzGrid();
-  if (name === 'fikr') renderFikr('fikr-content-quran');
 }
 
 function getJuzKey(n) { return `q_juz_${n}`; }
@@ -1493,15 +1450,6 @@ document.getElementById('namozPrevDay').addEventListener('click', () => {
 document.getElementById('namozNextDay').addEventListener('click', () => {
   if (namozDayOffset < 0) { namozDayOffset++; renderNamoz(); }
 });
-
-function showNamozTab(name, btn) {
-  document.querySelectorAll('#app-namoz .page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('#namozTabs .tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('np-' + name).classList.add('active');
-  btn.classList.add('active');
-  if (name === 'fikr') renderFikr('fikr-content-namoz');
-  if (name === 'namoz') renderNamoz();
-}
 
 let fikrAnon = false;
 
